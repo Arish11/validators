@@ -10,33 +10,36 @@ export class AppComponent implements OnInit {
   text :any
   validRecordsArr:any = []
   inValidRecordsArr:any = []
+  invalidRecords = false
+  recordsExceded = false
 
   wordCounter(){
-    var record = this.text ? this.text.split(/\s+/) : 0;
-    if(record.length !== 0){
-      for (let i = 0; i<record.length; i++ ){
-        if(record[i].length === 4 || record[i].length === 13){
-            this.validRecordsArr.push(record[i])
+    var records = this.text ? this.text.split(/\s+/) : 0;
+    if(records.length !== 0){
+      for (let i = 0; i<records.length; i++ ){
+        if(records[i].length === 4 || records[i].length === 13){
+            this.validRecordsArr.push(records[i])
         }else{
-          this.inValidRecordsArr.push(record[i])
+          this.inValidRecordsArr.push(records[i])
         }
       }
       if((this.inValidRecordsArr.length+this.validRecordsArr.length) > 10){
-        alert("The records have exceded limit")
+        this.recordsExceded = true
+      }else if(this.inValidRecordsArr.length !== 0){
+        this.invalidRecords = true
+      }else{
+        console.log("I got into the else to change flag status")
+        this.recordsExceded = false
+        this.invalidRecords = false
       }
     }
     console.log("this event is triggered and valid inputs are " + this.validRecordsArr)
     console.log("this event is triggered and invalid inputs are " + this.inValidRecordsArr)
+    records = null
+    this.validRecordsArr = []
+    this.inValidRecordsArr = []
   }
 
-// 1234
-// 1231
-// 424
-// 234345
-// 234256554
-// 23434667675
-// 234345234235
-// 1234566543211
 
 
   ngOnInit(): void {

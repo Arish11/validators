@@ -1,6 +1,18 @@
  <!-- This is a fork -->
  <div class="container">
+  <p *ngIf="invalidRecords" style="color: red;">The input has some invalid records</p>
+  <p *ngIf="recordsExceded" style="color: red;">The input has exceded limit of 10 records</p>
   <textarea [(ngModel)]="text" placeholder="Enter your text here..."></textarea>
   <div>
   <button (click)="wordCounter()"> Count </button>
 </div>
+<!--
+1234
+1231
+424
+234345
+234256554
+23434667675
+234345234235
+1234566543211
+ -->
